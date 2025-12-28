@@ -1,14 +1,6 @@
 plugins {
     id 'java'
-    id 'org.openjfx.javafxplugin' version '0.0.14'
     id 'application'
-}
-
-javafx {
-    version = '21.0.9'
-    modules = ['javafx.controls', 'javafx.fxml']
-    platform = 'win'
-    configuration = 'compileOnly'
 }
 
 application {
@@ -16,18 +8,28 @@ application {
 }
 
 group = 'com.aiden.dungeons'
-version = '1.0-SNAPSHOT'
+version = '0.0.1'
 
 repositories {
     mavenCentral()
-    gradlePluginPortal()
 }
 
 dependencies {
+    implementation("org.openjfx:javafx-base:21.0.9:win")
+    implementation("org.openjfx:javafx-controls:21.0.9:win")
+    implementation("org.openjfx:javafx-fxml:21.0.9:win")
+    implementation("org.openjfx:javafx-graphics:21.0.9:win")
 }
 
 distributions {
     main {
         distributionBaseName = 'aiden_dungeons'
     }
+}
+
+tasks.withType(JavaExec).configureEach {
+    jvmArgs = [
+            "--module-path", sourceSets.main.runtimeClasspath.asPath,
+            "--add-modules", "javafx.controls,javafx.graphics,javafx.base,javafx.fxml"
+    ]
 }
