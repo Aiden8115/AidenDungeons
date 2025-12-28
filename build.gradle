@@ -1,12 +1,14 @@
 plugins {
     id 'java'
-    id 'org.openjfx.javafxplugin' version '0.1.0'
+    id 'org.openjfx.javafxplugin' version '0.0.14'
     id 'application'
 }
 
 javafx {
-    version = '17.0.2'
+    version = '21.0.9'
     modules = ['javafx.controls', 'javafx.fxml']
+    platform = 'win'
+    configuration = 'compileOnly'
 }
 
 application {
@@ -18,20 +20,14 @@ version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    gradlePluginPortal()
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 distributions {
     main {
         distributionBaseName = 'aiden_dungeons'
     }
-}
-
-test {
-    useJUnitPlatform()
 }
