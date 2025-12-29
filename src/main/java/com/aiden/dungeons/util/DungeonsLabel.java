@@ -1,7 +1,7 @@
 package com.aiden.dungeons.util;
 
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -14,6 +14,10 @@ public class DungeonsLabel extends Label {
         this.setTextFill(textFill);
     }
 
+    public void remove() {
+        ((Pane) this.getParent()).getChildren().remove(this);
+    }
+
     public static class Builder {
         private String value = "Default";
         private InputStream fontInputStream = this.getClass().getResourceAsStream("/assets/fonts/unifont-17.0.03.otf");
@@ -21,7 +25,7 @@ public class DungeonsLabel extends Label {
         private Color textFill;
 
         public Builder() {
-            this.textFill = Color.BLACK;
+            this.textFill = Color.WHITE;
         }
 
         public static Builder create() {
@@ -39,12 +43,16 @@ public class DungeonsLabel extends Label {
             return this;
         }
 
+        public Builder size(double size) {
+            return font("unifont-17.0.03.otf", size);
+        }
+
         public Builder textFill(Color color) {
             this.textFill = color;
             return this;
         }
 
-        public DungeonsLabel build(StackPane pane) {
+        public DungeonsLabel build(Pane pane) {
             DungeonsLabel label = new DungeonsLabel(value, font, textFill);
             pane.getChildren().add(label);
             return label;

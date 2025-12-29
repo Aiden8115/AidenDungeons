@@ -19,7 +19,7 @@ public class Logger {
         System.out.println("[" + colorStr(Colors.CYAN, LocalDateTime.now().format(DATE_TIME_FORMATTER)) + "] [" + colorStr(Colors.RED, "ERROR") + "] " + colorStr(Colors.RED, obj.toString()));
     }
 
-    private String colorStr(Colors colors, String s){
+    public String colorStr(Colors colors, String s){
         return switch (colors) {
             case BLACK -> "\033[30m" + s + "\033[0m";
             case RED -> "\033[31m" + s + "\033[0m";
@@ -33,7 +33,7 @@ public class Logger {
         };
     }
 
-    private enum Colors {
+    public enum Colors {
         BLACK, RED, GREEN, YELLOW, BLUE, PURPLE, CYAN, WHITE, GREEN_BOLD
     }
 }

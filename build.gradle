@@ -19,6 +19,14 @@ dependencies {
     implementation("org.openjfx:javafx-controls:21.0.9:win")
     implementation("org.openjfx:javafx-fxml:21.0.9:win")
     implementation("org.openjfx:javafx-graphics:21.0.9:win")
+    implementation("org.openjfx:javafx-base:21.0.9:mac")
+    implementation("org.openjfx:javafx-controls:21.0.9:mac")
+    implementation("org.openjfx:javafx-fxml:21.0.9:mac")
+    implementation("org.openjfx:javafx-graphics:21.0.9:mac")
+    implementation("org.openjfx:javafx-base:21.0.9:linux")
+    implementation("org.openjfx:javafx-controls:21.0.9:linux")
+    implementation("org.openjfx:javafx-fxml:21.0.9:linux")
+    implementation("org.openjfx:javafx-graphics:21.0.9:linux")
 }
 
 distributions {
