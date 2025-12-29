@@ -15,14 +15,12 @@ public class DungeonsLabel extends Label {
     }
 
     public static class Builder {
-        private String value;
-        private Font font;
-        private Color textFill;
+        private String value = "Default";
         private InputStream fontInputStream = this.getClass().getResourceAsStream("/assets/fonts/unifont-17.0.03.otf");
+        private Font font = Font.loadFont(fontInputStream, 20);
+        private Color textFill;
 
         public Builder() {
-            this.value = "Default";
-            this.font = Font.loadFont(fontInputStream, 20);
             this.textFill = Color.BLACK;
         }
 
@@ -36,6 +34,7 @@ public class DungeonsLabel extends Label {
         }
 
         public Builder font(String name, double size) {
+            this.fontInputStream = this.getClass().getResourceAsStream("/assets/fonts/" + name);
             this.font = Font.loadFont(fontInputStream, size);
             return this;
         }
