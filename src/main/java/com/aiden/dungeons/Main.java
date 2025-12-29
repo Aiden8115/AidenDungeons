@@ -1,9 +1,10 @@
 package com.aiden.dungeons;
 
+import com.aiden.dungeons.util.DungeonsLabel;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -16,10 +17,15 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         stage.setTitle("Aiden's Dungeons");
+
+
         StackPane root = new StackPane();
 
-        this.scene = new Scene(root, 1000, 618);
+        Label label = DungeonsLabel.Builder.create()
+                .value("Hello World!")
+                .build(root);
 
+        this.scene = new Scene(root, 1000, 618);
         stage.setScene(scene);
         stage.show();
     }
