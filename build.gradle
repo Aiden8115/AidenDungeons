@@ -1,10 +1,21 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 plugins {
     id 'java'
     id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+    id 'com.gradleup.shadow' version '9.3.0'
 }
 
 application {
     mainClass = 'com.aiden.dungeons.Main'
+}
+
+javafx {
+    version("21.0.9")
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    platform = 'win'
+    configurations = [ 'implementation', 'testImplementation' ]
 }
 
 group = 'com.aiden.dungeons'
@@ -15,18 +26,6 @@ repositories {
 }
 
 dependencies {
-    implementation("org.openjfx:javafx-base:21.0.9:win")
-    implementation("org.openjfx:javafx-controls:21.0.9:win")
-    implementation("org.openjfx:javafx-fxml:21.0.9:win")
-    implementation("org.openjfx:javafx-graphics:21.0.9:win")
-    implementation("org.openjfx:javafx-base:21.0.9:mac")
-    implementation("org.openjfx:javafx-controls:21.0.9:mac")
-    implementation("org.openjfx:javafx-fxml:21.0.9:mac")
-    implementation("org.openjfx:javafx-graphics:21.0.9:mac")
-    implementation("org.openjfx:javafx-base:21.0.9:linux")
-    implementation("org.openjfx:javafx-controls:21.0.9:linux")
-    implementation("org.openjfx:javafx-fxml:21.0.9:linux")
-    implementation("org.openjfx:javafx-graphics:21.0.9:linux")
 }
 
 distributions {
@@ -40,4 +39,26 @@ tasks.withType(JavaExec).configureEach {
             "--module-path", sourceSets.main.runtimeClasspath.asPath,
             "--add-modules", "javafx.controls,javafx.graphics,javafx.base,javafx.fxml"
     ]
+}
+
+tasks.named('shadowJar', ShadowJar) {
+    archiveVersion = ''
+    archiveBaseName = 'aiden_dungeons'
+    manifest {
+        attributes "Main-Class": "com.aiden.dungeons.Main"
+    }
+    configurations = [project.configurations.shadowImplementation]
+}
+
+configurations {
+    shadowImplementation {
+        extendsFrom configurations.implementation
+        canBeResolved = true
+        canBeConsumed = false
+        attributes {
+            attribute(Attribute.of("org.gradle.native.operatingSystem", String), "windows")
+            attribute(Attribute.of("org.gradle.native.architecture", String), "x86-64")
+            attribute(Attribute.of("org.gradle.usage", String), "java-runtime")
+        }
+    }
 }
