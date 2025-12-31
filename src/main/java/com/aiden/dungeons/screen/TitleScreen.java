@@ -1,6 +1,7 @@
 package com.aiden.dungeons.screen;
 
 import com.aiden.dungeons.button.AbstractButton;
+import com.aiden.dungeons.button.QuitButton;
 import com.aiden.dungeons.button.StartButton;
 import com.aiden.dungeons.util.DungeonsLabel;
 import javafx.application.Platform;
@@ -14,6 +15,7 @@ import javafx.scene.paint.Color;
 public class TitleScreen extends AbstractScreen {
     public DungeonsLabel gameTitle;
     public AbstractButton startButton;
+    public AbstractButton quitButton;
 
     public TitleScreen(Pane pane) {
         super(pane);
@@ -33,6 +35,7 @@ public class TitleScreen extends AbstractScreen {
 
         // Start button
         this.startButton = new StartButton(pane, this);
+        this.quitButton = new QuitButton(pane, this);
     }
 
     @Override
@@ -41,6 +44,7 @@ public class TitleScreen extends AbstractScreen {
 
     @Override
     public void close(Pane pane) {
+        super.close(pane);
         this.gameTitle.remove();
         this.startButton.label.remove();
     }

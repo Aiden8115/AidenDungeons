@@ -21,6 +21,6 @@ public class Floor1Screen extends AbstractScreen {
 
     @Override
     public void close(Pane pane) {
-
+        super.close(pane);
     }
 }
