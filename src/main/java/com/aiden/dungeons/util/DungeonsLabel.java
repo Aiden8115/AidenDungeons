@@ -1,5 +1,6 @@
 package com.aiden.dungeons.util;
 
+import com.aiden.dungeons.Dungeons;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -52,9 +53,9 @@ public class DungeonsLabel extends Label {
             return this;
         }
 
-        public DungeonsLabel build(Pane pane) {
+        public DungeonsLabel build() {
             DungeonsLabel label = new DungeonsLabel(value, font, textFill);
-            pane.getChildren().add(label);
+            Dungeons.ROOT_PANE.getChildren().add(label);
             return label;
         }
     }

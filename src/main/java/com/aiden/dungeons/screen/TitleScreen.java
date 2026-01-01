@@ -17,35 +17,36 @@ public class TitleScreen extends AbstractScreen {
     public AbstractButton startButton;
     public AbstractButton quitButton;
 
-    public TitleScreen(Pane pane) {
-        super(pane);
+    public TitleScreen() {
+        super();
     }
 
     @Override
-    public void load(Pane pane) {
+    public void load() {
         // Game title
         this.gameTitle = DungeonsLabel.Builder.create()
                 .value("Aiden Dungeons")
                 .size(50)
                 .textFill(Color.BLACK)
-                .build(pane);
+                .build();
         StackPane.setAlignment(this.gameTitle, Pos.TOP_CENTER);
         this.gameTitle.setTranslateY(100);
         this.gameTitle.setBackground(Background.fill(Color.LIME));
 
         // Start button
-        this.startButton = new StartButton(pane, this);
-        this.quitButton = new QuitButton(pane, this);
+        this.startButton = new StartButton(this);
+        this.quitButton = new QuitButton(this);
     }
 
     @Override
-    public void tick(ActionEvent event, Pane pane) {
+    public void tick(ActionEvent event) {
     }
 
     @Override
-    public void close(Pane pane) {
-        super.close(pane);
+    public void close() {
+        super.close();
         this.gameTitle.remove();
         this.startButton.label.remove();
+        this.quitButton.label.remove();
     }
 }

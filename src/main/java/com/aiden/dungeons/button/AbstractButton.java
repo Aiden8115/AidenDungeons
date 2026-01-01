@@ -15,11 +15,11 @@ public abstract class AbstractButton {
     public AbstractScreen screen;
     public DungeonsLabel label;
 
-    public AbstractButton(Pane pane, String text, double xMultiplier, double yMultiplier) {
+    public AbstractButton(String text, double xMultiplier, double yMultiplier) {
         this.label = DungeonsLabel.Builder.create()
                 .value(text)
                 .size(30)
-                .build(pane);
+                .build();
         this.label.setAlignment(Pos.CENTER);
         this.label.setPrefWidth(500);
         this.label.setPrefHeight(50);
@@ -54,7 +54,7 @@ public abstract class AbstractButton {
             event.consume();
         });
         this.label.setOnMousePressed(event -> {
-            onClicked(pane, event);
+            onClicked(event);
             event.consume();
         });
     }
@@ -73,5 +73,5 @@ public abstract class AbstractButton {
         return timeline;
     }
 
-    public abstract void onClicked(Pane pane, MouseEvent event);
+    public abstract void onClicked(MouseEvent event);
 }

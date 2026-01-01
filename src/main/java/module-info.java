@@ -4,4 +4,6 @@ module AidenDungeons.main {
     requires javafx.graphics;
     exports com.aiden.dungeons;
     exports com.aiden.dungeons.util;
+    exports com.aiden.dungeons.screen;
+    exports com.aiden.dungeons.button;
 }

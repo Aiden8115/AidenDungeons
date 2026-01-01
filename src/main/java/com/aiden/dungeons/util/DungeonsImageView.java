@@ -1,5 +1,6 @@
 package com.aiden.dungeons.util;
 
+import com.aiden.dungeons.Dungeons;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -56,9 +57,9 @@ public class DungeonsImageView extends ImageView {
             return this;
         }
 
-        public DungeonsImageView build(StackPane pane) {
+        public DungeonsImageView build() {
             DungeonsImageView imageView = new DungeonsImageView(image, fitWidth, fitHeight, preserveRatio);
-            pane.getChildren().add(imageView);
+            Dungeons.ROOT_PANE.getChildren().add(imageView);
             return imageView;
         }
     }

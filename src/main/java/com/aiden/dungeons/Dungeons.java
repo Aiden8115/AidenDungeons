@@ -1,5 +1,7 @@
 package com.aiden.dungeons;
 
+import com.aiden.dungeons.key_binding.KeyBinding;
+import com.aiden.dungeons.screen.AbstractScreen;
 import com.aiden.dungeons.screen.TitleScreen;
 import com.aiden.dungeons.util.Logger;
 import javafx.animation.KeyFrame;
@@ -15,9 +17,11 @@ import javafx.util.Duration;
 
 public class Dungeons extends Application {
     public static final Logger LOGGER = new Logger();
-    public Scene scene;
+    public static Scene SCENE;
     private static double WIDTH = 1000;
     private static double HEIGHT = 618;
+    public static AbstractScreen CURRENT_SCREEN;
+    public static StackPane ROOT_PANE;
 
     public static void dungeonsMain(String... args) {
         launch(args);
@@ -35,18 +39,21 @@ public class Dungeons extends Application {
         LOGGER.info("Title loaded: " + stage.getTitle());
 
         LOGGER.info("Loading \"root\" stack pane...");
-        StackPane root = new StackPane();
-        root.setBackground(new Background(new BackgroundFill(
+        ROOT_PANE = new StackPane();
+        ROOT_PANE.setBackground(new Background(new BackgroundFill(
                 Color.color(0, 0, 0),
                 null, null
         )));
         LOGGER.info("\"root\" stack pane loaded");
 
-        TitleScreen titleScreen = new TitleScreen(root);
-
-        this.scene = new Scene(root, WIDTH, HEIGHT);
-        stage.setScene(scene);
+        LOGGER.info("Loading scene...");
+        SCENE = new Scene(ROOT_PANE, WIDTH, HEIGHT);
+        stage.setScene(SCENE);
         stage.show();
+
+        KeyBinding.registerAllKeyBindings(stage);
+
+        CURRENT_SCREEN = new TitleScreen();
 
         Timeline timeline = new Timeline(new KeyFrame(
                 Duration.seconds(0.001),
@@ -68,6 +75,11 @@ public class Dungeons extends Application {
 
     public static double getHeight() {
         return HEIGHT;
+    }
+
+    public static void setCurrentScreen(AbstractScreen screen) {
+        CURRENT_SCREEN.close();
+        CURRENT_SCREEN = screen;
     }
 
     public static void quitSys() {
