@@ -1,9 +1,13 @@
 package com.aiden.dungeons;
 
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
+
 public class Main {
     public static void main(String[] args) {
-        Dungeons.LOGGER.info("Launching AidenDungeons...");
-        Dungeons.LOGGER.warn("The warning \" Unsupported JavaFX configuration: classes were loaded from 'unnamed module @????????' \" is normal, so fell free to ignore it. ");
-        Dungeons.dungeonsMain(args);
+        Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+        config.setTitle("AidenDungeons");
+        config.setWindowedMode(1000, 600);
+        Lwjgl3Application application = new Lwjgl3Application(new AidenDungeons(), config);
     }
 }
