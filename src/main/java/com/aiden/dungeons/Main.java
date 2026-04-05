@@ -8,6 +8,7 @@ public class Main {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setTitle("AidenDungeons");
         config.setWindowedMode(1000, 600);
-        Lwjgl3Application application = new Lwjgl3Application(new AidenDungeons(), config);
+        AidenDungeons.INSTANCE = new AidenDungeons();
+        Lwjgl3Application application = new Lwjgl3Application(AidenDungeons.INSTANCE, config);
     }
 }

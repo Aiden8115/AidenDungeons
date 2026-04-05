@@ -1,14 +1,33 @@
 plugins {
     id 'java'
     id 'application'
+    id 'com.gradleup.shadow' version '9.4.1'
 }
 
 application {
     mainClass = 'com.aiden.dungeons.Main'
 }
 
+String getVersionFromJava() {
+    try {
+        File file = file("src/main/java/com/aiden/dungeons/AidenDungeons.java")
+        String line = file.readLines().find { it.contains("public static final String VERSION") }
+        return (line =~ /"([^"]+)"/)[0][1]
+    } catch (Exception ignored) {
+        return "0.0.0" // 兜底版本
+    }
+}
+
+shadowJar {
+    archiveVersion = getVersionFromJava()
+    archiveClassifier = ''
+    archiveBaseName = 'aiden_dungeons'
+
+    mergeServiceFiles()
+}
+
 group = 'com.aiden.dungeons'
-version = '0.0.1'
+version = getVersionFromJava()
 
 repositories {
     mavenCentral()
@@ -18,6 +37,17 @@ dependencies {
     implementation "com.badlogicgames.gdx:gdx:1.14.0"
     implementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:1.14.0"
     implementation "com.badlogicgames.gdx:gdx-platform:1.14.0:natives-desktop"
+    implementation "com.badlogicgames.gdx:gdx-freetype:1.14.0"
+    implementation "com.badlogicgames.gdx:gdx-freetype-platform:1.14.0:natives-desktop"
+
+    implementation "org.lwjgl:lwjgl-tinyfd:3.3.3"
+    implementation "org.lwjgl:lwjgl-tinyfd:3.3.3:natives-linux"
+    implementation "org.lwjgl:lwjgl-tinyfd:3.3.3:natives-linux-arm32"
+    implementation "org.lwjgl:lwjgl-tinyfd:3.3.3:natives-linux-arm64"
+    implementation "org.lwjgl:lwjgl-tinyfd:3.3.3:natives-macos"
+    implementation "org.lwjgl:lwjgl-tinyfd:3.3.3:natives-macos-arm64"
+    implementation "org.lwjgl:lwjgl-tinyfd:3.3.3:natives-windows"
+    implementation "org.lwjgl:lwjgl-tinyfd:3.3.3:natives-windows-x86"
 }
 
 distributions {
